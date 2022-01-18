@@ -330,6 +330,103 @@ public class BinaryTreeAllProgramsPractice {
 		return false;
 	}
 	
+	
+	// diameter of a binary Tree
+	public static int dia1(Node node)
+	{
+		if(node  == null)
+		{
+			return 0;
+		}
+		
+		int ldia = dia1(node.left);
+		int rdia = dia1(node.right);
+		int mdia = height(node.left) + height(node.right)+2;
+		int dia = Math.max(mdia, Math.max(rdia, mdia));
+		return dia;
+	}
+	// another method for diameter
+	
+	public static class DiaPair{
+		int height;
+		int dia;
+	}
+	
+	public static DiaPair dia2(Node node)
+	{
+		if(node == null)
+		{
+			DiaPair bp = new DiaPair();
+			bp.height = -1;
+			bp.dia = 0;
+			return bp;
+		}
+		
+		DiaPair ldia = dia2(node.left);
+		DiaPair rdia = dia2(node.right);
+		DiaPair myPair = new DiaPair();
+		myPair.height = Math.max(ldia.height, rdia.height)+1;
+		myPair.dia = Math.max(ldia.height + rdia.height+2, Math.max(ldia.dia, rdia.dia));
+		return myPair;
+	}
+	
+	public static class bstPair{
+		boolean isbst;
+		int max;
+		int min;
+	}
+	
+	public static bstPair isBst(Node node)
+	{
+		if(node == null)
+		{
+			bstPair bp = new bstPair();
+			bp.max = Integer.MIN_VALUE;
+			bp.min = Integer.MAX_VALUE;
+			bp.isbst = true;
+			return bp;
+		}
+		
+		bstPair islBST = isBst(node.left);
+		bstPair isrBST = isBst(node.right);
+		bstPair myPair = new bstPair();
+		myPair.min = Math.min(myPair.min, Math.min(islBST.min,isrBST.min)); 
+		myPair.min = Math.min(myPair.min, Math.min(islBST.min,isrBST.min));
+		myPair.isbst = islBST.isbst && isrBST.isbst && node.data>islBST.max && node.data < isrBST.min;
+		return myPair;
+	}
+	
+	
+	
+	public static class BalancedTree
+	{
+		boolean isBal;
+		int height;
+	}
+	
+	public static BalancedTree BalancedTree(Node node)
+	{
+		if(node == null)
+		{
+			BalancedTree bp = new BalancedTree();
+			bp.isBal = true;
+			bp.height = -1;
+		}
+		
+		BalancedTree lp = BalancedTree(node.left);
+		BalancedTree rp = BalancedTree(node.right);
+		BalancedTree mp = new BalancedTree();
+		int gap = Math.abs(lp.height - rp.height);
+		if(gap > 1)
+		{
+			mp.isBal = false;
+		}
+		int th = Math.max(mp.height, mp.height)+1;
+		return mp;
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 			

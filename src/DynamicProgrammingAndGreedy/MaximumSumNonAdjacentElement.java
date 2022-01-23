@@ -15,7 +15,7 @@ public class MaximumSumNonAdjacentElement {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		int [] arr = {5,10,10,100,5};
+		int [] arr = {2,5,10,100,20,6};
 		
 		incexc [][] dp = new incexc[2][arr.length];
 		

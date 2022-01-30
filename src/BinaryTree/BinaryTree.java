@@ -123,6 +123,33 @@ public class BinaryTree {
 		return size;
 	}
 	
+	public static HashMap<Integer , ArrayList<Integer>> hmap = new HashMap<>();
+	public static void printVertical(Node node, int hd)
+	{
+		if(node == null)
+		{
+			hd = 0;
+			return;
+		}
+		
+		if(hmap.containsKey(hd))
+		{
+			ArrayList<Integer> list = hmap.get(hd);
+			list.add(node.data);
+//			System.out.println("In contains hd->"+hd +"node -> "+node.data);
+			hmap.put(hd, list);
+		}
+		else {
+			ArrayList<Integer> list = new ArrayList<>();
+//			System.out.println("In adding new element hd->"+hd +"node -> "+node.data);
+			list.add(node.data);
+			hmap.put(hd, list);
+		}
+		printVertical(node.left ,hd-1);
+		printVertical(node.right,hd+1);
+	}
+	
+	
 	public static int height(Node node)
 	{
 		if(node == null)
@@ -144,6 +171,32 @@ public class BinaryTree {
 		    System.out.println("Min Value : " + max(root));
 		    System.out.println("Size of tree : " + size(root));
 		    System.out.println("Height of tree : " + height(root));
+		    System.out.println("****************************************");
+		    printVertical(root,0);
+		    System.out.println("****************************************");
+		    
+		    Set<Integer> set = hmap.keySet();
+			ArrayList<Integer> list = new ArrayList<Integer>(set);
+			Collections.sort(list);
+			
+			for(int i = 0 ; i < list.size() ; i++)
+			{
+				ArrayList<Integer> itrtList = 	hmap.get(list.get(i));
+				for(int k :itrtList)
+				{
+					System.out.print(k +" ");
+				}
+				System.out.println();
+			}
+			
+//		    for(Map.Entry<Integer, ArrayList<Integer>> map : hmap.entrySet())
+//		    {
+//		    	for(int i = 0 ; i < map.getValue().size() ; i++)
+//		    	{
+//		    		System.out.print(map.getValue().get(i)+" ");
+//		    	}
+//		    	System.out.println();
+//		    }
 	}
 
 }

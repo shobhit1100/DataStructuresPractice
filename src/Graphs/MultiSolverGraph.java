@@ -18,6 +18,23 @@ public class MultiSolverGraph {
 		}
 	}
 	
+	public static class Pair implements Comparable<Pair>{
+		String path;
+		int wts;
+		
+		public Pair(String path , int wts)
+		{
+			this.path = path;
+			this.wts = wts;
+		}
+		
+		@Override
+		public int compareTo(Pair o) {
+			// TODO Auto-generated method stub
+			return this.wts - o.wts;
+		}
+	}
+	
 	public static ArrayList<Edge> [] prepareGraph()
 	{
 		// I am setting the graph as 7 by default and using this method to inly return the graph
